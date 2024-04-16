@@ -1,3 +1,4 @@
+import 'package:chatapp/auth/auth_services.dart';
 import 'package:chatapp/components/my_button.dart';
 import 'package:chatapp/components/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +11,34 @@ class LoginView extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   LoginView({super.key, required this.onTap});
 
-  // login function
-  void login() {
-    print("Email: ${emailController.text}");
-    print("Password: ${passwordController.text}");
+  void login(BuildContext context) async {
+    final AuthService _auth = AuthService();
+
+    print(emailController.text);
+    print(passwordController.text);
+
+    // Check if email and password are not empty
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+          title: Text("Please enter both email and password."),
+        ),
+      );
+      return; // Exit the function if fields are empty
+    }
+
+    try {
+      await _auth.signInWithEmailAndPassword(
+          emailController.text, passwordController.text);
+    } on Exception catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(e.toString()),
+        ),
+      );
+    }
   }
 
   @override
@@ -45,7 +70,7 @@ class LoginView extends StatelessWidget {
               controller: passwordController,
             ),
             const SizedBox(height: 25),
-            MyButton(text: "Login", onTap: login),
+            MyButton(text: "Login", onTap: () => login(context)),
             const SizedBox(height: 25),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -15,6 +15,7 @@ class MyTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextField(
+        controller: controller,
         obscureText: obscureText,
         decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
@@ -29,7 +30,8 @@ class MyTextField extends StatelessWidget {
             hintStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
             focusedBorder: OutlineInputBorder(
                 borderSide:
-                    BorderSide(color: Theme.of(context).colorScheme.primary))),
+                    BorderSide(color: Theme.of(context).colorScheme.primary),
+                borderRadius: BorderRadius.circular(30))),
       ),
     );
   }
