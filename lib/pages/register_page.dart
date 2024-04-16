@@ -1,3 +1,4 @@
+import 'package:chatapp/auth/auth_services.dart';
 import 'package:chatapp/components/my_button.dart';
 import 'package:chatapp/components/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +13,29 @@ class RegisterView extends StatelessWidget {
 
   RegisterView({super.key, required this.onTap});
   // Register function
-  void Register() {
-    print("Email: ${emailController.text}");
-    print("Password: ${passwordController.text}");
+  void Register(BuildContext context) async {
+    final _auth = AuthService();
+
+    if (passwordController.text != confPasswordController.text) {
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+          title: Text("Passwords do not match."),
+        ),
+      );
+    } else {
+      try {
+        await _auth.registerWithEmailAndPassword(
+            emailController.text, passwordController.text);
+      } on Exception catch (e) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(e.toString()),
+          ),
+        );
+      }
+    }
   }
 
   @override
@@ -52,7 +73,7 @@ class RegisterView extends StatelessWidget {
               controller: confPasswordController,
             ),
             const SizedBox(height: 25),
-            MyButton(text: "Register", onTap: Register),
+            MyButton(text: "Register", onTap: () => Register(context)),
             const SizedBox(height: 25),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

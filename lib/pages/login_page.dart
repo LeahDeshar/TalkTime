@@ -14,6 +14,7 @@ class LoginView extends StatelessWidget {
   void login(BuildContext context) async {
     final AuthService _auth = AuthService();
 
+    print("login");
     print(emailController.text);
     print(passwordController.text);
 
