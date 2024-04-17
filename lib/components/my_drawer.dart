@@ -1,12 +1,12 @@
 import 'package:chatapp/pages/setting_page.dart';
 import 'package:flutter/material.dart';
-import 'package:chatapp/auth/auth_services.dart';
+import 'package:chatapp/services/auth/auth_services.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
   void logout() {
-    final _auth = AuthService();
-    _auth.logout();
+    final auth = AuthService();
+    auth.logout();
   }
 
   @override
@@ -29,7 +29,7 @@ class MyDrawer extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: ListTile(
-                  title: Text(
+                  title: const Text(
                     "H O M E",
                   ),
                   leading: Icon(
@@ -44,7 +44,7 @@ class MyDrawer extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: ListTile(
-                  title: Text(
+                  title: const Text(
                     "S E T T I N G",
                   ),
                   leading: Icon(
@@ -53,8 +53,10 @@ class MyDrawer extends StatelessWidget {
                   ),
                   onTap: () {
                     Navigator.pop(context);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SettingPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SettingPage()));
                   },
                 ),
               ),
@@ -63,7 +65,7 @@ class MyDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 8.0, bottom: 25),
             child: ListTile(
-              title: Text(
+              title: const Text(
                 "L O G O U T",
               ),
               leading: Icon(

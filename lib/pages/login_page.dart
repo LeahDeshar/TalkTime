@@ -1,8 +1,7 @@
-import 'package:chatapp/auth/auth_services.dart';
+import 'package:chatapp/services/auth/auth_services.dart';
 import 'package:chatapp/components/my_button.dart';
 import 'package:chatapp/components/my_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class LoginView extends StatelessWidget {
   // email and password textfields controller
@@ -12,7 +11,7 @@ class LoginView extends StatelessWidget {
   LoginView({super.key, required this.onTap});
 
   void login(BuildContext context) async {
-    final AuthService _auth = AuthService();
+    final AuthService auth = AuthService();
 
     print("login");
     print(emailController.text);
@@ -30,7 +29,7 @@ class LoginView extends StatelessWidget {
     }
 
     try {
-      await _auth.signInWithEmailAndPassword(
+      await auth.signInWithEmailAndPassword(
           emailController.text, passwordController.text);
     } on Exception catch (e) {
       showDialog(

@@ -1,8 +1,7 @@
-import 'package:chatapp/auth/auth_services.dart';
+import 'package:chatapp/services/auth/auth_services.dart';
 import 'package:chatapp/components/my_button.dart';
 import 'package:chatapp/components/my_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class RegisterView extends StatelessWidget {
   // email and password textfields controller
@@ -14,7 +13,7 @@ class RegisterView extends StatelessWidget {
   RegisterView({super.key, required this.onTap});
   // Register function
   void Register(BuildContext context) async {
-    final _auth = AuthService();
+    final auth = AuthService();
 
     if (passwordController.text != confPasswordController.text) {
       showDialog(
@@ -25,7 +24,7 @@ class RegisterView extends StatelessWidget {
       );
     } else {
       try {
-        await _auth.registerWithEmailAndPassword(
+        await auth.registerWithEmailAndPassword(
             emailController.text, passwordController.text);
       } on Exception catch (e) {
         showDialog(
