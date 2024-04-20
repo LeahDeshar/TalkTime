@@ -81,11 +81,10 @@ class LoginView extends StatelessWidget {
                         color: Theme.of(context).colorScheme.primary)),
                 GestureDetector(
                   onTap: onTap,
-                  child: Text(
+                  child: const Text(
                     "Register Now",
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary),
+                        fontWeight: FontWeight.bold, color: Colors.blue),
                   ),
                 ),
               ],
